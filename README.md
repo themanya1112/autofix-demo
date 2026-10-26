@@ -25,7 +25,9 @@ pytest -q
 ```bash
 # 1. Reproduce: add the issue's test to the suite. CI turns red.
 cp issues/002-percentage-coupon/test_reproduce.py tests/test_issue_002.py
-git add tests/test_issue_002.py && git commit -m "Reproduce issue 002" && git push
+git add tests/test_issue_002.py
+git commit -m "Reproduce issue 002"
+git push
 
 # 2. Repair (from the autofix folder)
 autofix run --repo ../autofix-demo --test tests/test_issue_002.py \
