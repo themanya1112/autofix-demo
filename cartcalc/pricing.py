@@ -40,7 +40,7 @@ def bulk_discount(qty: int, unit_price: float) -> float:
     10 or more units get 10% off, 50 or more get 15% off; fewer than 10 pay full price.
     """
     for min_qty, pct in BULK_TIERS:
-        if qty > min_qty:
+        if qty >= min_qty:
             return round_cents(qty * unit_price * (100 - pct) / 100)
     return round_cents(qty * unit_price)
 
