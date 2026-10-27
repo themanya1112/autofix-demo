@@ -69,7 +69,7 @@ def shipping_cost(weight_kg: float, express: bool = False, order_value: float = 
     for orders of 75.00 or more."""
     if weight_kg <= 0:
         return 0.0
-    if not express and order_value >= FREE_SHIPPING_FROM:
+    if order_value >= FREE_SHIPPING_FROM:
         return 0.0
     extra_kg = max(0, math.ceil(weight_kg) - 1)
     cost = SHIPPING_BASE + SHIPPING_PER_KG * extra_kg
@@ -87,5 +87,5 @@ def checkout_total(
     discounted amount, then shipping."""
     lines = sum(bulk_discount(qty, price) for price, qty in items)
     after_coupon = apply_coupon(lines, coupon)
-    taxed = after_coupon + tax(after_coupon, tax_rate)
+    taxed = after_coupon + tax(lines, tax_rate)
     return round_cents(taxed + shipping_cost(weight_kg, express, after_coupon))
