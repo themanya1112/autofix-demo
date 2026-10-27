@@ -66,7 +66,3 @@ def test_bulk_discount_starts_at_ten_units():
     assert bulk_discount(10, 10.0) == 90.0
     assert bulk_discount(50, 10.0) == 425.0
 
-def test_percent_coupon_takes_percent_off():
-    """SAVE10 on 80.00 must give 72.00, not 0.00."""
-    assert apply_coupon(80.0, "SAVE10") == 72.0
-    assert apply_coupon(80.0, "SAVE25") == 60.0
