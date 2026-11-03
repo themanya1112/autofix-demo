@@ -84,10 +84,12 @@ def cart_total(items: list[tuple[float, int]], coupon: str | None = None) -> flo
     bulk-discounted amount, not of the full price. The total is never negative.
     """
     gross = subtotal(items)
+    # Bulk‑discounted total
+    bulk_total = sum(bulk_discount(qty, price) for price, qty in items)
+    # Coupon applied to the bulk‑discounted amount
     kind, value = COUPONS.get(coupon or "", ("flat", 0.0))
-    coupon_off = gross * value / 100 if kind == "percent" else value
-    bulk_off = gross - sum(bulk_discount(qty, price) for price, qty in items)
-    return round_cents(max(gross - bulk_off - coupon_off, 0.0))
+    coupon_off = bulk_total * value / 100 if kind == "percent" else value
+    return round_cents(max(bulk_total - coupon_off, 0.0))
 
 
 def checkout_total(
