@@ -52,7 +52,7 @@ def apply_coupon(total: float, code: str | None) -> float:
         return round_cents(total)
     kind, value = COUPONS[code]
     if kind == "percent":
-        discounted = total - total * value
+        discounted = total - total * value / 100
     else:
         discounted = total - value
     return round_cents(max(discounted, 0.0))
