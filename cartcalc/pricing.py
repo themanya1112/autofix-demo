@@ -76,6 +76,20 @@ def shipping_cost(weight_kg: float, express: bool = False, order_value: float = 
     return round_cents(cost * 2 if express else cost)
 
 
+def cart_total(items: list[tuple[float, int]], coupon: str | None = None) -> float:
+    """Order value shown in the cart, before tax and shipping.
+
+    Discounts apply in a fixed order: first the bulk discount on each line, then the
+    coupon on what is left. A percentage coupon therefore takes its percentage of the
+    bulk-discounted amount, not of the full price. The total is never negative.
+    """
+    gross = subtotal(items)
+    kind, value = COUPONS.get(coupon or "", ("flat", 0.0))
+    coupon_off = gross * value / 100 if kind == "percent" else value
+    bulk_off = gross - sum(bulk_discount(qty, price) for price, qty in items)
+    return round_cents(max(gross - bulk_off - coupon_off, 0.0))
+
+
 def checkout_total(
     items: list[tuple[float, int]],
     coupon: str | None = None,

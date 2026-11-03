@@ -3,6 +3,7 @@
 from cartcalc.pricing import (
     apply_coupon,
     bulk_discount,
+    cart_total,
     checkout_total,
     round_cents,
     shipping_cost,
@@ -13,6 +14,7 @@ from cartcalc.pricing import (
 __all__ = [
     "apply_coupon",
     "bulk_discount",
+    "cart_total",
     "checkout_total",
     "round_cents",
     "shipping_cost",

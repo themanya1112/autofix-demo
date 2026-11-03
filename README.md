@@ -12,6 +12,7 @@ It has real-looking bugs, each with a bug report in `issues/`:
 | [002](issues/002-percentage-coupon/README.md) | percentage coupons make the order free | reported with a reproduction test, for the live demo |
 | [003](issues/003-tax-before-coupon/README.md) | tax is charged on the price before the coupon | reported with a reproduction test, for the live demo |
 | [004](issues/004-express-free-shipping/README.md) | express shipping is free on big orders | reported with a reproduction test, for the live demo |
+| [005](issues/005-discount-order/README.md) | percentage coupons on bulk orders are taken from the full price (discounts applied in the wrong order) | reported with one narrow reproduction test, for the live demo |
 
 All other tests pass and act as the regression suite.
 
