@@ -101,5 +101,5 @@ def checkout_total(
     discounted amount, then shipping."""
     lines = sum(bulk_discount(qty, price) for price, qty in items)
     after_coupon = apply_coupon(lines, coupon)
-    taxed = after_coupon + tax(lines, tax_rate)
+    taxed = after_coupon + tax(after_coupon, tax_rate)
     return round_cents(taxed + shipping_cost(weight_kg, express, after_coupon))
